@@ -40,6 +40,23 @@ function createError(message, code = 'VALIDATION_ERROR') {
   return err;
 }
 
+/**
+ * Waits for Firebase Auth to finish restoring any persisted mobile/WebView session
+ * before checking `auth.currentUser`, avoiding false "Please sign in first." errors
+ * on cold APK restarts.
+ */
+async function requireCurrentUser() {
+  if (!auth) throw createError('Please sign in first.', 'UNAUTHENTICATED');
+  if (auth.currentUser) return auth.currentUser;
+  if (typeof auth.authStateReady === 'function') {
+    await auth.authStateReady();
+  }
+  if (!auth.currentUser) {
+    throw createError('Please sign in first.', 'UNAUTHENTICATED');
+  }
+  return auth.currentUser;
+}
+
 function getLocalDateIso(date = new Date()) {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, '0');
@@ -828,8 +845,7 @@ function triggerBrowserDownload(blob, filename) {
    ========================================================================== */
 
 export async function getEmployeeDashboard() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw createError('Please sign in first.', 'UNAUTHENTICATED');
+  const currentUser = await requireCurrentUser();
 
   try {
     const [empSnap, settings] = await Promise.all([
@@ -888,8 +904,7 @@ export async function getEmployeeDashboard() {
 }
 
 export async function employeeCheckIn() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw createError('Please sign in first.', 'UNAUTHENTICATED');
+  const currentUser = await requireCurrentUser();
 
   try {
     const [empSnap, settings] = await Promise.all([
@@ -954,8 +969,7 @@ export async function employeeCheckIn() {
 }
 
 export async function employeeCheckOut() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw createError('Please sign in first.', 'UNAUTHENTICATED');
+  const currentUser = await requireCurrentUser();
 
   try {
     const todayDate = getLocalDateIso();
@@ -1048,8 +1062,7 @@ function mapLeaveDoc(d) {
  * Employee submits a new leave request (branch is strictly taken from registered profile).
  */
 export async function applyLeave({ leaveType, startDate, endDate, reason }) {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw createError('Please sign in first.', 'UNAUTHENTICATED');
+  const currentUser = await requireCurrentUser();
 
   if (!LEAVE_TYPES.includes(leaveType)) {
     throw createError('Please select a valid leave type.');
@@ -1123,8 +1136,7 @@ export async function applyLeave({ leaveType, startDate, endDate, reason }) {
  * Employee fetches ONLY their own leave requests.
  */
 export async function getMyLeaveRequests() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw createError('Please sign in first.', 'UNAUTHENTICATED');
+  const currentUser = await requireCurrentUser();
 
   try {
     const snap = await getDocs(

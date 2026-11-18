@@ -96,7 +96,7 @@ function LeaveStatusBadge({ status }) {
 }
 
 export default function ManagerDashboardPage({ portalRole = 'ADMIN' }) {
-  const { user, logout } = useAuth();
+  const { user, isAuthReady, logout } = useAuth();
   const navigate = useNavigate();
 
   const isAdminPortal = portalRole === 'ADMIN' || user?.role === 'ADMIN';
@@ -227,6 +227,7 @@ export default function ManagerDashboardPage({ portalRole = 'ADMIN' }) {
   }, [assignedManagerBranch]);
 
   useEffect(() => {
+    if (!isAuthReady) return;
     let active = true;
     setLoading(true);
     Promise.all([
@@ -241,7 +242,7 @@ export default function ManagerDashboardPage({ portalRole = 'ADMIN' }) {
     return () => {
       active = false;
     };
-  }, [loadDashboard, loadEmployees, loadManagers, loadSettings, loadLeaves]);
+  }, [isAuthReady, loadDashboard, loadEmployees, loadManagers, loadSettings, loadLeaves]);
 
   const buildReportParams = useCallback(() => {
     const params = { type: reportType };

@@ -30,9 +30,11 @@ export function AuthProvider({ children }) {
   // stay signed in instantly with zero login flash.
   const [user, setUser] = useState(() => getCachedUserProfile());
   const [isVerifying, setIsVerifying] = useState(() => !getCachedUserProfile());
+  const [isAuthReady, setIsAuthReady] = useState(false);
 
   useEffect(() => {
     const unsubscribe = subscribeToAuthChanges(async (firebaseUser) => {
+      setIsAuthReady(true);
       if (!firebaseUser) {
         clearCachedUserProfile();
         setUser(null);
@@ -97,12 +99,13 @@ export function AuthProvider({ children }) {
     () => ({
       user,
       isVerifying,
+      isAuthReady,
       isAuthenticated,
       login,
       completeManagerSetup,
       logout,
     }),
-    [user, isVerifying, isAuthenticated, login, completeManagerSetup, logout]
+    [user, isVerifying, isAuthReady, isAuthenticated, login, completeManagerSetup, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -180,9 +180,18 @@ export async function getManagerDashboard({ branch = 'ALL', date = '' } = {}) {
   }
 }
 
+async function requireCurrentUser() {
+  if (!auth) throw new Error('Not signed in.');
+  if (auth.currentUser) return auth.currentUser;
+  if (typeof auth.authStateReady === 'function') {
+    await auth.authStateReady();
+  }
+  if (!auth.currentUser) throw new Error('Not signed in.');
+  return auth.currentUser;
+}
+
 export async function getEmployeeDashboard() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw new Error('Not signed in.');
+  const currentUser = await requireCurrentUser();
 
   try {
     const [empSnap, settings] = await Promise.all([
@@ -234,8 +243,7 @@ export async function getEmployeeDashboard() {
 }
 
 export async function employeeCheckIn() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw new Error('Not signed in.');
+  const currentUser = await requireCurrentUser();
 
   try {
     const [empSnap, settings] = await Promise.all([
@@ -295,8 +303,7 @@ export async function employeeCheckIn() {
 }
 
 export async function employeeCheckOut() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw new Error('Not signed in.');
+  const currentUser = await requireCurrentUser();
 
   try {
     const todayDate = getLocalDateIso();
@@ -365,8 +372,7 @@ function computeInclusiveDays(startDate, endDate) {
 }
 
 export async function applyLeave({ leaveType, startDate, endDate, reason }) {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw new Error('Not signed in.');
+  const currentUser = await requireCurrentUser();
 
   if (!LEAVE_TYPES.includes(leaveType)) throw new Error('Select a valid leave type.');
   const totalDays = computeInclusiveDays(startDate, endDate);
@@ -415,8 +421,7 @@ export async function applyLeave({ leaveType, startDate, endDate, reason }) {
 }
 
 export async function getMyLeaveRequests() {
-  const currentUser = auth.currentUser;
-  if (!currentUser) throw new Error('Not signed in.');
+  const currentUser = await requireCurrentUser();
 
   try {
     const snap = await getDocs(

@@ -33,13 +33,14 @@ export const app = isFirebaseConfigured
     : initializeApp(firebaseConfig)
   : null;
 
-// Firebase Authentication with durable local persistence (IndexedDB + localStorage fallback)
-// so mobile / Capacitor / PWA sessions remain signed in across app restarts until manual logout.
+// Firebase Authentication with durable local persistence (localStorage first to match
+// authService.login's browserLocalPersistence and hydrate instantly inside Capacitor Android WebView,
+// with IndexedDB fallback) so sessions remain signed in across app restarts until manual logout.
 let authInstance = null;
 if (app) {
   try {
     authInstance = initializeAuth(app, {
-      persistence: [indexedDBLocalPersistence, browserLocalPersistence],
+      persistence: [browserLocalPersistence, indexedDBLocalPersistence],
     });
   } catch {
     // Already initialized (e.g., Vite HMR)

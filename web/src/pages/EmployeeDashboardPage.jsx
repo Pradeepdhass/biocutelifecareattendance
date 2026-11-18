@@ -83,7 +83,7 @@ function LeaveStatusBadge({ status }) {
 }
 
 export default function EmployeeDashboardPage() {
-  const { logout } = useAuth();
+  const { user, isAuthReady, logout } = useAuth();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState('attendance');
@@ -125,8 +125,9 @@ export default function EmployeeDashboardPage() {
   }, []);
 
   useEffect(() => {
+    if (!isAuthReady) return;
     loadSelfDashboard();
-  }, [loadSelfDashboard]);
+  }, [isAuthReady, loadSelfDashboard]);
 
   const handleCheckIn = async () => {
     setActionBusy('in');
@@ -188,7 +189,7 @@ export default function EmployeeDashboardPage() {
     navigate('/login', { replace: true });
   };
 
-  const employee = data?.employee;
+  const employee = data?.employee || user?.employee || null;
   const settings = data?.settings || DEFAULT_ATTENDANCE_SETTINGS;
   const today = data?.todayAttendance;
   const todayIso = getTodayIso();
