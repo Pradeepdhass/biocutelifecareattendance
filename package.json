@@ -1,0 +1,31 @@
+{
+  "name": "biocute-lifecare-attendance-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bio Cute Life Care — Two-Branch Attendance Management System (Coimbatore & Chennai)",
+  "scripts": {
+    "dev": "npm --prefix web run dev",
+    "backend": "npm --prefix backend run dev",
+    "backend:start": "npm --prefix backend run start",
+    "setup:manager": "npm --prefix backend run setup:manager",
+    "build": "npm --prefix web run build",
+    "preview": "npm --prefix web run preview",
+    "install:backend": "npm --prefix backend install",
+    "install:web": "npm --prefix web install",
+    "install:mobile": "npm --prefix mobile install",
+    "install:all": "npm --prefix backend install && npm --prefix web install && npm --prefix mobile install",
+    "web": "npm --prefix web run dev",
+    "web:build": "npm --prefix web run build",
+    "cap:sync": "npx cap sync android",
+    "android:sync": "npm run build && npx cap sync android",
+    "android:apk": "npm run build && npx cap sync android && cd android && gradlew.bat assembleDebug",
+    "mobile": "npm --prefix mobile run start",
+    "mobile:android": "npm --prefix mobile run android",
+    "mobile:ios": "npm --prefix mobile run ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/cli": "^8.6.2",
+    "@capacitor/core": "^8.6.2"
+  }
+}

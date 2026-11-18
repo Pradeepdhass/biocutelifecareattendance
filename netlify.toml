@@ -1,0 +1,32 @@
+# Netlify Configuration — Bio Cute Life Care (Web Portal Only)
+# Builds strictly from ./web (and ./shared via Vite @shared alias).
+# Android, Mobile (Expo), Backend, and local asset files are excluded.
+
+[build]
+  base = "web"
+  command = "npm run build"
+  publish = "dist"
+  # Skip Netlify rebuilds when only non-web directories (android, mobile, backend, etc.) change
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../shared ../netlify.toml"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA Fallback for React Router (/login, /admin, /manager, /employee, /setup-manager)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security & Caching Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

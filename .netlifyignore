@@ -1,0 +1,33 @@
+# Exclude non-web files from Netlify hosting / CLI deploys
+/android/
+/mobile/
+/backend/
+/assets/
+node_modules/
+web/node_modules/
+
+# Capacitor & Android build files
+capacitor.config.json
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# Firebase CLI rule files (managed via Firebase Console / CLI, not Netlify)
+database.rules.json
+firestore.rules
+
+# Root mockup/reference images & docs
+image.png
+mobile_login_bg.png
+web_login_bg.png
+README.md
+
+# Local environment & logs
+.env
+web/.env
+mobile/.env
+backend/.env
+*.log
+.DS_Store
+Thumbs.db

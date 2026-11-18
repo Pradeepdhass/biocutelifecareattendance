@@ -1,0 +1,38 @@
+# Dependencies & Build Outputs
+node_modules/
+dist/
+web/dist/
+.expo/
+.netlify/
+
+# Environment Secrets & Local Databases
+.env
+.env.local
+web/.env
+mobile/.env
+backend/.env
+backend/data/*.db
+backend/data/*.db-wal
+backend/data/*.db-shm
+backend/data/.jwt_secret
+*.jks
+*.keystore
+key.properties
+*.log
+
+# ==============================================================================
+# Ignored for Netlify Web-Only Hosting
+# (Kept intact locally on disk; excluded when pushing to Git for Netlify)
+# ==============================================================================
+/android/
+/mobile/
+/backend/
+/assets/
+capacitor.config.json
+database.rules.json
+firestore.rules
+image.png
+mobile_login_bg.png
+web_login_bg.png
+*.apk
+*.aab

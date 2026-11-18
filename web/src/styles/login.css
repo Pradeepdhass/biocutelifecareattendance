@@ -1,0 +1,1392 @@
+/* ==========================================================================
+   Bio Cute Life Care — Attendance Management System
+   Fit-to-Screen Responsive Healthcare Login UI (Pure CSS + Vector SVG)
+   Color Palette:
+     Primary Navy   : #082D52
+     Primary Red    : #D6002A
+     Secondary Blue : #1686D9
+     White          : #FFFFFF
+     Light Border   : #D5E0EB
+   ========================================================================== */
+
+:root {
+  --bclc-navy: #082d52;
+  --bclc-red: #d6002a;
+  --bclc-red-bright: #e31135;
+  --bclc-red-mid: #b90024;
+  --bclc-red-deep: #7f0018;
+  --bclc-blue: #1686d9;
+  --bclc-white: #ffffff;
+  --bclc-border: #d5e0eb;
+  --bclc-rule: #d8e2ec;
+  --bclc-text-secondary: #3f556d;
+  --bclc-text-muted: #6f849b;
+  --bclc-error-bg: #fff2f4;
+  --bclc-error-border: #f7c6cf;
+  --bclc-success: #0e8a50;
+  --bclc-success-bg: #eefbf4;
+  --bclc-success-border: #bfead2;
+  --bclc-font: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
+  font-family: var(--bclc-font);
+  color: var(--bclc-navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  touch-action: manipulation;
+}
+
+/* ==========================================================================
+   Fit-to-Screen Atmospheric Healthcare Backdrop (No Raster Background Image)
+   ========================================================================== */
+
+.bclc-auth-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    radial-gradient(circle at 18% 55%, rgba(22, 134, 217, 0.14) 0%, rgba(22, 134, 217, 0) 44%),
+    radial-gradient(circle at 86% 14%, rgba(22, 134, 217, 0.09) 0%, rgba(22, 134, 217, 0) 38%),
+    linear-gradient(135deg, #eef6fd 0%, #f8fbff 48%, #e4f1fc 100%);
+  overflow-x: hidden;
+}
+
+/* Lock cleanly to viewport height on desktop/laptop screens where content fits */
+@media (min-width: 901px) and (min-height: 580px) {
+  .bclc-auth-page {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+.bclc-ambient-waves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   Main Split Container: Fluid Fit Across All Desktop & Laptop Resolutions
+   ========================================================================== */
+
+.bclc-auth-main {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: clamp(14px, 2.8vh, 36px) clamp(20px, 4.5vw, 68px) clamp(8px, 1.5vh, 20px);
+}
+
+.bclc-auth-container {
+  width: 100%;
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(360px, 464px);
+  align-items: stretch;
+  gap: clamp(24px, 4.5vw, 68px);
+}
+
+/* ==========================================================================
+   Left Column: Big Company Logo Anchored at TOP + Welcome Copy + Medical Hub
+   ========================================================================== */
+
+.bclc-brand-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  min-width: 0;
+  padding-top: clamp(4px, 1.2vh, 18px);
+}
+
+.bclc-logo-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(12px, 2.6vh, 28px);
+}
+
+.bclc-company-logo {
+  display: block;
+  width: clamp(320px, 35vw, 490px);
+  max-width: 100%;
+  max-height: clamp(92px, 18.5vh, 148px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(8, 45, 82, 0.06));
+}
+
+.bclc-welcome-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(14px, 2.8vh, 30px);
+}
+
+.bclc-welcome-kicker {
+  margin: 0 0 2px;
+  font-size: clamp(18px, min(2vw, 3vh), 26px);
+  font-weight: 500;
+  color: var(--bclc-navy);
+  letter-spacing: -0.01em;
+}
+
+.bclc-welcome-brand {
+  margin: 0 0 clamp(6px, 1.2vh, 12px);
+  font-size: clamp(24px, min(2.65vw, 4.4vh), 36px);
+  font-weight: 800;
+  line-height: 1.18;
+  color: var(--bclc-navy);
+  letter-spacing: -0.02em;
+}
+
+.bclc-welcome-system {
+  margin: 0 0 clamp(6px, 1.2vh, 12px);
+  font-size: clamp(15px, min(1.55vw, 2.35vh), 21px);
+  font-weight: 500;
+  color: var(--bclc-navy);
+  letter-spacing: 0.055em;
+}
+
+.bclc-welcome-tagline {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  font-size: clamp(14px, min(1.35vw, 2.1vh), 18px);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--bclc-navy);
+}
+
+.bclc-tagline-dot {
+  color: var(--bclc-red);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+/* Luminous Vector Medical Attendance Hub */
+.bclc-feature-hub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.2vw, 28px);
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.bclc-hub-visual {
+  position: relative;
+  width: clamp(112px, min(14vw, 18.5vh), 164px);
+  height: clamp(112px, min(14vw, 18.5vh), 164px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bclc-hub-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(22, 134, 217, 0.24);
+}
+
+.bclc-hub-ring-outer {
+  inset: 8px;
+  border-style: dashed;
+  animation: bclcSlowOrbit 28s linear infinite;
+}
+
+.bclc-hub-ring-inner {
+  inset: 26px;
+  background: radial-gradient(circle, rgba(22, 134, 217, 0.2) 0%, rgba(22, 134, 217, 0.02) 72%);
+  border-color: rgba(22, 134, 217, 0.34);
+}
+
+@keyframes bclcSlowOrbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bclc-hub-core {
+  position: relative;
+  z-index: 2;
+  width: clamp(58px, 7.6vh, 76px);
+  height: clamp(58px, 7.6vh, 76px);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #279bf0 0%, #1686d9 52%, #0c5aa3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 12px 28px rgba(22, 134, 217, 0.36),
+    0 0 0 6px rgba(22, 134, 217, 0.13);
+}
+
+.bclc-hub-core svg {
+  width: 52%;
+  height: 52%;
+}
+
+.bclc-hub-node {
+  position: absolute;
+  z-index: 3;
+  width: clamp(32px, 4.2vh, 38px);
+  height: clamp(32px, 4.2vh, 38px);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid rgba(22, 134, 217, 0.28);
+  color: var(--bclc-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(8, 45, 82, 0.1);
+}
+
+.bclc-node-top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bclc-node-left {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bclc-node-right {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bclc-node-bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bclc-hub-pills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(136px, 1fr));
+  gap: clamp(8px, 1vh, 10px);
+}
+
+.bclc-hub-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(8px, 1.1vh, 10px) 12px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(213, 224, 235, 0.95);
+  color: var(--bclc-navy);
+  font-size: 12.5px;
+  font-weight: 600;
+  box-shadow: 0 5px 14px rgba(8, 45, 82, 0.05);
+  white-space: nowrap;
+}
+
+.bclc-hub-pill svg {
+  color: var(--bclc-blue);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Right Column: Premium Admin Login Card (Fluid Height-Aware Sizing)
+   ========================================================================== */
+
+.bclc-card-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.bclc-login-card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1.25px solid #dce6f0;
+  box-shadow:
+    0 20px 48px rgba(8, 45, 82, 0.12),
+    0 6px 16px rgba(22, 134, 217, 0.06);
+  padding: clamp(20px, 3.2vh, 32px) clamp(22px, 2.8vw, 36px) clamp(18px, 2.6vh, 26px);
+  animation: bclcCardEnter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bclcCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Centered Shield Header with Flanking Horizontal Rules */
+.bclc-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: clamp(14px, 2.4vh, 22px);
+}
+
+.bclc-shield-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 5px;
+}
+
+.bclc-header-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--bclc-rule);
+}
+
+.bclc-secure-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bclc-navy);
+  letter-spacing: 0.01em;
+  margin-bottom: clamp(6px, 1.2vh, 11px);
+}
+
+.bclc-login-title {
+  margin: 0 0 clamp(4px, 0.8vh, 8px);
+  font-size: clamp(25px, min(2.3vw, 4vh), 33px);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+}
+
+.bclc-title-admin {
+  color: var(--bclc-navy);
+}
+
+.bclc-title-login {
+  color: var(--bclc-red);
+}
+
+.bclc-login-subtitle {
+  margin: 0;
+  font-size: clamp(13px, 1.7vh, 14.5px);
+  line-height: 1.4;
+  color: var(--bclc-text-secondary);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Alert Banners
+   ========================================================================== */
+
+.bclc-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-bottom: clamp(10px, 1.6vh, 16px);
+}
+
+.bclc-alert-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.bclc-alert-error {
+  background: var(--bclc-error-bg);
+  border: 1px solid var(--bclc-error-border);
+  color: var(--bclc-red);
+}
+
+.bclc-alert-success {
+  background: var(--bclc-success-bg);
+  border: 1px solid var(--bclc-success-border);
+  color: var(--bclc-success);
+}
+
+/* ==========================================================================
+   Form Inputs
+   ========================================================================== */
+
+.bclc-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(11px, 1.7vh, 16px);
+}
+
+.bclc-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bclc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.bclc-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--bclc-white);
+  border: 1.4px solid var(--bclc-border);
+  border-radius: 10px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bclc-input-wrapper:hover {
+  border-color: #b4c8dc;
+}
+
+.bclc-input-wrapper:focus-within {
+  border-color: var(--bclc-blue);
+  box-shadow: 0 0 0 3.5px rgba(22, 134, 217, 0.13);
+}
+
+.bclc-input-wrapper.bclc-input-error {
+  border-color: var(--bclc-red);
+  background: #fffafb;
+}
+
+.bclc-input-wrapper.bclc-input-error:focus-within {
+  box-shadow: 0 0 0 3.5px rgba(214, 0, 42, 0.12);
+}
+
+.bclc-input-icon-left {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 15px;
+  color: var(--bclc-navy);
+  transition: color 0.2s ease;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.bclc-input-wrapper:focus-within .bclc-input-icon-left {
+  color: var(--bclc-blue);
+}
+
+.bclc-input-wrapper.bclc-input-error .bclc-input-icon-left {
+  color: var(--bclc-red);
+}
+
+.bclc-input {
+  width: 100%;
+  height: clamp(43px, 5.8vh, 50px);
+  padding: 0 14px 0 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--bclc-navy);
+}
+
+.bclc-input::placeholder {
+  color: #8b9eb2;
+  font-weight: 400;
+}
+
+.bclc-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.bclc-input-with-toggle {
+  padding-right: 46px;
+}
+
+.bclc-password-toggle {
+  position: absolute;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #4d6278;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.bclc-password-toggle:hover {
+  color: var(--bclc-navy);
+  background: rgba(8, 45, 82, 0.06);
+}
+
+.bclc-password-toggle:focus-visible {
+  outline: 2px solid var(--bclc-blue);
+  outline-offset: 1px;
+}
+
+.bclc-field-error {
+  margin: 0;
+  padding-left: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--bclc-red);
+}
+
+/* ==========================================================================
+   Remember Me & Forgot Password Row
+   ========================================================================== */
+
+.bclc-form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 1px;
+  margin-bottom: 2px;
+}
+
+.bclc-checkbox-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.bclc-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.bclc-checkbox-box {
+  width: 17px;
+  height: 17px;
+  border-radius: 4px;
+  border: 1.5px solid #96aabf;
+  background: var(--bclc-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+  flex-shrink: 0;
+}
+
+.bclc-checkbox-box::after {
+  content: '';
+  width: 5px;
+  height: 8px;
+  border: solid var(--bclc-white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  margin-bottom: 2px;
+  transition: transform 0.15s ease;
+}
+
+.bclc-checkbox-input:checked + .bclc-checkbox-box {
+  background: var(--bclc-navy);
+  border-color: var(--bclc-navy);
+}
+
+.bclc-checkbox-input:checked + .bclc-checkbox-box::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.bclc-checkbox-input:focus-visible + .bclc-checkbox-box {
+  box-shadow: 0 0 0 3px rgba(22, 134, 217, 0.25);
+}
+
+.bclc-checkbox-text {
+  color: var(--bclc-navy);
+}
+
+.bclc-forgot-link {
+  border: none;
+  background: transparent;
+  padding: 2px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--bclc-red);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.bclc-forgot-link:hover {
+  color: var(--bclc-red-deep);
+  text-decoration: underline;
+}
+
+.bclc-forgot-link:focus-visible {
+  outline: 2px solid var(--bclc-red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Primary Glossy Crimson Gradient Login Button
+   ========================================================================== */
+
+.bclc-login-button {
+  width: 100%;
+  height: clamp(45px, 6vh, 52px);
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    var(--bclc-red-bright) 0%,
+    var(--bclc-red-mid) 58%,
+    var(--bclc-red-deep) 100%
+  );
+  color: var(--bclc-white);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow:
+    0 9px 22px rgba(185, 0, 36, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition:
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.bclc-login-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 13px 26px rgba(185, 0, 36, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  filter: brightness(1.05);
+}
+
+.bclc-login-button:active:not(:disabled) {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 5px 12px rgba(185, 0, 36, 0.28);
+}
+
+.bclc-login-button:focus-visible {
+  outline: 3px solid rgba(214, 0, 42, 0.35);
+  outline-offset: 2px;
+}
+
+.bclc-login-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+  transform: none;
+}
+
+.bclc-login-btn-icon {
+  transition: transform 0.2s ease;
+}
+
+.bclc-login-button:hover:not(:disabled) .bclc-login-btn-icon {
+  transform: translateX(2px);
+}
+
+.bclc-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: var(--bclc-white);
+  border-radius: 50%;
+  animation: bclcSpin 0.75s linear infinite;
+}
+
+@keyframes bclcSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bclc-recovery-success {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bclc-back-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.bclc-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--bclc-navy);
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.18s ease;
+}
+
+.bclc-back-link:hover {
+  color: var(--bclc-blue);
+}
+
+/* ==========================================================================
+   Card Footer: Flanking Thin Lines + Powered by Bio Cute Life Care
+   ========================================================================== */
+
+.bclc-card-footer {
+  margin-top: clamp(14px, 2.2vh, 22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.bclc-footer-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--bclc-rule);
+}
+
+.bclc-powered-by {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bclc-navy);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   Bottom Sweeping Navy & Red Wave Footer (Compact & Flush to Bottom)
+   ========================================================================== */
+
+.bclc-page-footer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.bclc-footer-wave {
+  display: block;
+  width: 100%;
+  height: clamp(24px, 4.2vh, 52px);
+  margin-bottom: -1px;
+}
+
+.bclc-footer-bar {
+  background: var(--bclc-navy);
+  color: var(--bclc-white);
+  padding: clamp(8px, 1.3vh, 13px) clamp(16px, 4vw, 52px) clamp(10px, 1.6vh, 15px);
+}
+
+.bclc-footer-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.bclc-footer-items {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.bclc-footer-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(12px, 1.15vw, 14px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.bclc-footer-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.bclc-footer-pulse-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.bclc-footer-pulse-svg {
+  height: clamp(22px, 3.2vh, 30px);
+  width: auto;
+}
+
+/* ==========================================================================
+   Adaptive Breakpoints for Every Screen Size & Aspect Ratio
+   ========================================================================== */
+
+/* Compact Laptop Height (e.g. 1280x580–690 / 1366x768 with browser chrome) */
+@media (min-width: 901px) and (max-height: 690px) {
+  .bclc-hub-pills {
+    grid-template-columns: repeat(2, minmax(124px, 1fr));
+    gap: 6px;
+  }
+
+  .bclc-hub-pill {
+    padding: 6px 10px;
+    font-size: 11.5px;
+  }
+
+  .bclc-hub-visual {
+    width: 104px;
+    height: 104px;
+  }
+
+  .bclc-hub-core {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .bclc-hub-node {
+    width: 28px;
+    height: 28px;
+  }
+
+  .bclc-hub-node svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Very Short Landscape Viewports (<= 540px height): keep big logo on top, hide hub */
+@media (min-width: 901px) and (max-height: 540px) {
+  .bclc-feature-hub {
+    display: none;
+  }
+}
+
+/* Tablet Landscape (901px – 1120px) */
+@media (max-width: 1120px) and (min-width: 901px) {
+  .bclc-auth-container {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 415px);
+    gap: 28px;
+  }
+
+  .bclc-company-logo {
+    width: clamp(270px, 34vw, 370px);
+  }
+
+  .bclc-feature-hub {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bclc-hub-pills {
+    grid-template-columns: repeat(2, minmax(126px, 1fr));
+  }
+}
+
+/* Tablet Portrait & Mobile (<= 900px) — Big Logo Anchored at TOP */
+@media (max-width: 900px) {
+  .bclc-auth-page {
+    min-height: 100dvh;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .bclc-auth-main {
+    align-items: flex-start;
+    padding:
+      calc(clamp(14px, 2.4vh, 24px) + env(safe-area-inset-top, 0px))
+      16px
+      clamp(14px, 2vh, 22px);
+  }
+
+  .bclc-auth-container {
+    grid-template-columns: 1fr;
+    gap: clamp(12px, 2vh, 18px);
+    max-width: 460px;
+  }
+
+  .bclc-brand-panel {
+    padding-top: 0;
+  }
+
+  .bclc-logo-wrap {
+    margin-bottom: clamp(6px, 1.2vh, 12px);
+  }
+
+  .bclc-company-logo {
+    width: clamp(200px, 60vw, 290px);
+    max-height: 82px;
+  }
+
+  .bclc-welcome-block {
+    margin-bottom: 0;
+  }
+
+  .bclc-welcome-kicker {
+    font-size: clamp(13px, 1.8vh, 16px);
+  }
+
+  .bclc-welcome-brand {
+    font-size: clamp(20px, 3vh, 26px);
+    margin-bottom: 4px;
+  }
+
+  .bclc-welcome-system {
+    font-size: clamp(12px, 1.6vh, 14px);
+    margin-bottom: 4px;
+  }
+
+  .bclc-welcome-tagline {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .bclc-feature-hub {
+    display: none;
+  }
+
+  .bclc-login-card {
+    padding: 20px 18px 18px;
+    border-radius: 18px;
+  }
+
+  .bclc-role-tab {
+    min-height: 40px;
+    font-size: 13px;
+  }
+
+  .bclc-input {
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .bclc-login-button {
+    height: 48px;
+    font-size: 15.5px;
+  }
+
+  .bclc-footer-wave {
+    height: 20px;
+  }
+
+  .bclc-footer-bar {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .bclc-footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .bclc-footer-items {
+    justify-content: center;
+    gap: 6px 14px;
+  }
+
+  .bclc-footer-sep,
+  .bclc-footer-pulse-wrap {
+    display: none;
+  }
+
+  .bclc-footer-item {
+    font-size: 11.5px;
+  }
+}
+
+/* Small Phones (<= 420px) */
+@media (max-width: 420px) {
+  .bclc-auth-main {
+    padding:
+      calc(12px + env(safe-area-inset-top, 0px))
+      12px
+      12px;
+  }
+
+  .bclc-company-logo {
+    width: 190px;
+    max-height: 68px;
+  }
+
+  .bclc-welcome-brand {
+    font-size: 20px;
+  }
+
+  .bclc-welcome-system {
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+  }
+
+  .bclc-login-card {
+    padding: 18px 14px 16px;
+    border-radius: 16px;
+  }
+
+  .bclc-login-title {
+    font-size: 23px;
+  }
+
+  .bclc-role-tab {
+    font-size: 12.5px;
+    padding: 8px 4px;
+  }
+
+  .bclc-input {
+    height: 46px;
+    font-size: 16px;
+  }
+
+  .bclc-login-button {
+    height: 48px;
+    font-size: 15px;
+  }
+
+  .bclc-form-options {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .bclc-setup-banner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .bclc-setup-banner-btn {
+    justify-content: center;
+    padding: 9px 12px;
+  }
+}
+
+/* ==========================================================================
+   Protected Dashboard Styles
+   ========================================================================== */
+
+.bclc-dashboard-page {
+  min-height: 100vh;
+  background: #f3f7fc;
+  color: var(--bclc-navy);
+}
+
+.bclc-dashboard-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px clamp(20px, 4vw, 48px);
+  background: var(--bclc-navy);
+  color: var(--bclc-white);
+  box-shadow: 0 4px 16px rgba(8, 45, 82, 0.14);
+}
+
+.bclc-dashboard-kicker {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8ccbff;
+}
+
+.bclc-dashboard-title {
+  margin: 4px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.bclc-dashboard-user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bclc-dashboard-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.bclc-dashboard-user-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bclc-dashboard-user-email {
+  font-size: 12px;
+  color: #b7d2eb;
+}
+
+.bclc-logout-button {
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--bclc-red);
+  color: var(--bclc-white);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.bclc-logout-button:hover {
+  background: var(--bclc-red-bright);
+  transform: translateY(-1px);
+}
+
+.bclc-dashboard-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px clamp(20px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bclc-dashboard-welcome-card {
+  background: var(--bclc-white);
+  border: 1px solid var(--bclc-border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 6px 20px rgba(8, 45, 82, 0.05);
+}
+
+.bclc-dashboard-welcome-card h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  color: var(--bclc-navy);
+}
+
+.bclc-dashboard-welcome-card p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--bclc-text-secondary);
+}
+
+.bclc-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.bclc-stat-card {
+  background: var(--bclc-white);
+  border: 1px solid var(--bclc-border);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bclc-stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bclc-text-secondary);
+}
+
+.bclc-stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--bclc-navy);
+}
+
+.bclc-stat-note {
+  font-size: 12px;
+  color: var(--bclc-text-muted);
+}
+
+/* Setup Banner & Fullscreen Session Loader */
+.bclc-setup-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  background: #eef6fd;
+  border: 1px solid #b9d9f6;
+  color: #082d52;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.bclc-setup-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #082d52;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bclc-setup-banner-btn:hover {
+  background: #1686d9;
+}
+
+.bclc-fullscreen-loader {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #f2f7fc;
+  color: #082d52;
+  font-weight: 600;
+}
+
+.bclc-loader-ring {
+  width: 34px;
+  height: 34px;
+  border: 3.5px solid #d5e0eb;
+  border-top-color: #1686d9;
+  border-radius: 50%;
+  animation: bclcSpin 0.75s linear infinite;
+}
+
+/* 3-Role Login Switcher (Admin | Manager | Employee) */
+.bclc-role-switcher {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 4px;
+  margin-bottom: clamp(12px, 1.8vh, 18px);
+  background: #edf5fc;
+  border: 1.25px solid #d5e0eb;
+  border-radius: 11px;
+}
+
+.bclc-role-tab {
+  border: none;
+  background: transparent;
+  color: #3f556d;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 8px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.bclc-role-tab:hover:not(.is-active):not(:disabled) {
+  color: #082d52;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.bclc-role-tab.is-active {
+  background: #082d52;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(8, 45, 82, 0.22);
+}
+
+.bclc-role-tab:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
