@@ -21,11 +21,10 @@ key.properties
 *.log
 
 # ==============================================================================
-# Ignored for Netlify Web-Only Hosting
-# (Kept intact locally on disk; excluded when pushing to Git for Netlify)
+# Local-only / Build-artifact folders kept off GitHub
+# (React.js `web/`, React Native `mobile/`, and `shared/` ARE tracked on GitHub)
 # ==============================================================================
 /android/
-/mobile/
 /backend/
 /assets/
 capacitor.config.json

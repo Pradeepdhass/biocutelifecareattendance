@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "BioCute LifeCare",
+    "slug": "biocute-attendance-mobile",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.biocutelifecare.attendance",
+      "icon": "./assets/icon.png"
+    },
+    "android": {
+      "package": "com.biocutelifecare.attendance",
+      "icon": "./assets/icon.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "softwareKeyboardLayoutMode": "resize"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}

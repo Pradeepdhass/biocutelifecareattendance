@@ -1,3 +1,5 @@
+"$schema" = "https://open-api.netlify.com/netlify.schema.json"
+
 # Netlify Configuration — Bio Cute Life Care (Web Portal Only)
 # Builds strictly from ./web (and ./shared via Vite @shared alias).
 # Android, Mobile (Expo), Backend, and local asset files are excluded.

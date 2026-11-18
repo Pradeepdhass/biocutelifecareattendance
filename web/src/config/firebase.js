@@ -22,31 +22,41 @@ export const firebaseConfig = {
     `https://${import.meta.env.VITE_FIREBASE_PROJECT_ID}-default-rtdb.firebaseio.com`,
 };
 
-// Primary Firebase app instance
-export const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+export const isFirebaseConfigured = Boolean(
+  firebaseConfig.apiKey && firebaseConfig.projectId
+);
+
+// Primary Firebase app instance (guarded so the Login UI still renders if env vars aren't injected yet)
+export const app = isFirebaseConfigured
+  ? getApps().length > 0
+    ? getApp()
+    : initializeApp(firebaseConfig)
+  : null;
 
 // Firebase Authentication with durable local persistence (IndexedDB + localStorage fallback)
 // so mobile / Capacitor / PWA sessions remain signed in across app restarts until manual logout.
-let authInstance;
-try {
-  authInstance = initializeAuth(app, {
-    persistence: [indexedDBLocalPersistence, browserLocalPersistence],
-  });
-} catch {
-  // Already initialized (e.g., Vite HMR)
-  authInstance = getAuth(app);
+let authInstance = null;
+if (app) {
+  try {
+    authInstance = initializeAuth(app, {
+      persistence: [indexedDBLocalPersistence, browserLocalPersistence],
+    });
+  } catch {
+    // Already initialized (e.g., Vite HMR)
+    authInstance = getAuth(app);
+  }
 }
 export const auth = authInstance;
 
 // Cloud Firestore Database
-export const db = getFirestore(app);
+export const db = app ? getFirestore(app) : null;
 
 // Firebase Realtime Database (used for live branch check-in presence sync)
-export const rtdb = getDatabase(app);
+export const rtdb = app ? getDatabase(app) : null;
 
 // Firebase Analytics (browser-guarded)
 export let analytics = null;
-if (typeof window !== 'undefined') {
+if (app && typeof window !== 'undefined') {
   isAnalyticsSupported()
     .then((supported) => {
       if (supported && firebaseConfig.measurementId) {
@@ -63,6 +73,7 @@ if (typeof window !== 'undefined') {
  * a new Employee Auth account, preventing the Manager's active session from signing out.
  */
 export function getSecondaryAuth() {
+  if (!isFirebaseConfigured) return null;
   const existing = getApps().find((a) => a.name === 'EmployeeProvisioningApp');
   const secondaryApp = existing || initializeApp(firebaseConfig, 'EmployeeProvisioningApp');
   return getAuth(secondaryApp);

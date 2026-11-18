@@ -30,10 +30,15 @@ function RootRedirect() {
   return <Navigate to={getHomePathForRole(user?.role)} replace />;
 }
 
+const routerBase =
+  import.meta.env.BASE_URL === '/'
+    ? '/'
+    : import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={routerBase}>
         <Routes>
           <Route path="/" element={<RootRedirect />} />
           <Route

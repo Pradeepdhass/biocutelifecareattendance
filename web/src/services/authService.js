@@ -256,6 +256,13 @@ export async function loadUserProfile(firebaseUser) {
  * Checks Firestore system/config to determine whether the central ADMIN exists.
  */
 export async function getSetupStatus() {
+  if (!db) {
+    return {
+      adminExists: true,
+      managerExists: true,
+      branches: ['Coimbatore', 'Chennai'],
+    };
+  }
   try {
     const configSnap = await getDoc(doc(db, 'system', 'config'));
     return {
@@ -324,6 +331,12 @@ export const setupManager = setupAdmin;
  * and verifies that the account matches the selected login role tab.
  */
 export async function login({ email, password, rememberMe = true, role = '' }) {
+  if (!auth || !db) {
+    throw createAuthError(
+      'Firebase configuration is missing. Please set VITE_FIREBASE_* environment variables in your hosting provider.',
+      'FIREBASE_NOT_CONFIGURED'
+    );
+  }
   const emailError = validateEmail(email);
   if (emailError) throw createAuthError(emailError, 'VALIDATION_ERROR');
 
@@ -400,9 +413,15 @@ export async function activateAccount({ token, password }) {
 
 export async function logout() {
   clearCachedUserProfile();
-  await signOut(auth);
+  if (auth) {
+    await signOut(auth);
+  }
 }
 
 export function subscribeToAuthChanges(callback) {
+  if (!auth) {
+    Promise.resolve().then(() => callback(null));
+    return () => {};
+  }
   return onAuthStateChanged(auth, callback);
 }
