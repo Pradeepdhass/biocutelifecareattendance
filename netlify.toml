@@ -13,6 +13,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Firebase client config (VITE_FIREBASE_*) is set via Netlify Site Environment Variables.
 
 # SPA Fallback for React Router (/login, /admin, /manager, /employee, /setup-manager)
 [[redirects]]
